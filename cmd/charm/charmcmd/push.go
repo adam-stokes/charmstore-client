@@ -130,22 +130,22 @@ func (c *pushCommand) Run(ctxt *cmd.Context) error {
 		c.id.User = resp.User
 	}
 
-	var ch *charm.CharmDir
-	var b *charm.BundleDir
+	var ch charm.Charm
+	var b charm.Bundle
 	// Find the entity we want to upload. If the series is
 	// specified in the id, we know the kind of entity we
 	// need to upload; otherwise we fall back to trying
 	// both kinds of entity.
 	switch {
 	case c.id.Series == "bundle":
-		b, err = charm.ReadBundleDir(srcDir)
+		b, err = charm.ReadBundle(srcDir)
 	case c.id.Series != "":
-		ch, err = charm.ReadCharmDir(srcDir)
+		ch, err = charm.ReadCharm(srcDir)
 	default:
 		if charm.IsCharmDir(srcDir) {
-			ch, err = charm.ReadCharmDir(srcDir)
+			ch, err = charm.ReadCharm(srcDir)
 		} else {
-			b, err = charm.ReadBundleDir(srcDir)
+			b, err = charm.ReadBundle(srcDir)
 		}
 	}
 

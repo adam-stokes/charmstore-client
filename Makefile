@@ -25,8 +25,6 @@ $(GOPATH)/bin/godeps:
 # Start of GOPATH-dependent targets. Some targets only make sense -
 # and will only work - when this tree is found on the GOPATH.
 
-ifeq ($(CURDIR),$(PROJECT_DIR))
-
 build:
 	go build $(PROJECT)/...
 
@@ -40,21 +38,6 @@ clean:
 	go clean $(PROJECT)/...
 	rm -rf man scripts/__pycache__
 
-else
-
-build:
-	$(error Cannot $@; $(CURDIR) is not on GOPATH)
-
-check:
-	$(error Cannot $@; $(CURDIR) is not on GOPATH)
-
-install:
-	$(error Cannot $@; $(CURDIR) is not on GOPATH)
-
-clean:
-	$(error Cannot $@; $(CURDIR) is not on GOPATH)
-
-endif
 # End of GOPATH-dependent targets.
 
 # Reformat source files.
